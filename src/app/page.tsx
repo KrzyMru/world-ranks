@@ -1,9 +1,7 @@
-import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 const Page = () => {
-  return (
-    <></>
-  );
+  redirect('/ranking');
 }
 
 export default Page;
