@@ -1,0 +1,55 @@
+:root {
+  --dark-light: #6C727F;
+  --dark-medium: #282B30;
+  --dark-strong: #1B1D1F;
+  --blue: #4E80EE;
+  --gray-light: #D2D5DA;
+}
+
+.text__xl--semibold {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.text__lg--semibold {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.text__lg--medium {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.text__md--bold {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.text__md--medium {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.text__sm--bold {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+.text__sm--medium {
+  font-family: var(--font-be-vietnam-pro);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+input, button {
+  font-family: inherit;
+}
