@@ -10,39 +10,46 @@
   font-family: var(--font-be-vietnam-pro);
   font-weight: 600;
   font-size: 2rem;
+  margin: 0;
 }
 
 .text__lg--semibold {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 600;
   font-size: 1rem;
+  margin: 0;
 }
 .text__lg--medium {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 500;
   font-size: 1rem;
+  margin: 0;
 }
 
 .text__md--bold {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 700;
   font-size: 0.875rem;
+  margin: 0;
 }
 .text__md--medium {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 500;
   font-size: 0.875rem;
+  margin: 0;
 }
 
 .text__sm--bold {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 700;
   font-size: 0.75rem;
+  margin: 0;
 }
 .text__sm--medium {
   font-family: var(--font-be-vietnam-pro);
   font-weight: 500;
   font-size: 0.75rem;
+  margin: 0;
 }
 
 body {
