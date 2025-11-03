@@ -1,0 +1,27 @@
+.layout {
+    height: 100%;
+
+    background-image: url("/images/hero-image-sm.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 225px;
+    background-position: top;
+    background-color: var(--dark-strong);
+    @media screen and (min-width: 960px) {
+        background-size: 100% auto;
+    }
+    @media screen and (min-width: 1280px) {
+        background-image: url("/images/hero-image.jpg");
+    }
+
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    margin: 30px auto;
+    text-align: center;
+    color: var(--gray-light);
+    @media screen and (min-width: 960px) {
+        margin: 3% auto;
+    }
+}

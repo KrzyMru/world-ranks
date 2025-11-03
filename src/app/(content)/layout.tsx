@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./layout.module.css";
 
 const Layout = ({
@@ -6,7 +7,14 @@ const Layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <main>
+    <main className={styles.layout}>
+      <Image
+        src='/icons/Logo.svg'
+        alt='World Ranks'
+        width={174}
+        height={24}
+        className={`${styles.logo} text__lg--semibold`}
+      />
       {children}
     </main>
   );
