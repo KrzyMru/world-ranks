@@ -1,7 +1,16 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { CountryDataRanking } from "./types";
 
-const Page = () => {
+const Page = async () => {
+  const data = await fetch("https://restcountries.com/v3.1/all?fields=cca3,name,region,subregion,population,area,flags,independent,unMember", {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+  const countries: CountryDataRanking[] = await data.json();
+
   return (
     <div>
       <div>
