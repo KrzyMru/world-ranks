@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 0.25rem;
+    border: 1px solid var(--gray-light);
+    > :first-child {
+        opacity: 0;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+.checkbox[data-checked] {
+    background-color: var(--blue);
+    border: 1px solid var(--blue);
+    > :first-child {
+        opacity: 100;
+    }
+}

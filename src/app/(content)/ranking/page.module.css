@@ -40,5 +40,10 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    min-width: 220px;
+}
+
+.filters__status {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
