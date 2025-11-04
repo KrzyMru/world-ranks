@@ -13,7 +13,7 @@ const CheckboxFilter = (props: CheckboxFilterProps) => {
         className={styles.checkbox}
       >
         <Image 
-          src="/icons/done_round.svg"
+          src="/icons/Done_round.svg"
           alt=''
           width={20}
           height={20}
