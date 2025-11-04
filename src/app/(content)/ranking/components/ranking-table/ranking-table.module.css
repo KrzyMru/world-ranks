@@ -3,13 +3,13 @@
     color: var(--gray-light);
     table-layout: fixed;
     border-collapse: collapse;
-    @media screen and (max-width: 820px) {
+    @media screen and (max-width: 1023px) {
         .ranking__header tr th:last-child,
         .ranking__body tr td:last-child {
             display: none;
         }
     }
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 760px) {
         .ranking__header tr th:nth-last-child(2),
         .ranking__body tr td:nth-last-child(2) {
             display: none;
@@ -26,7 +26,7 @@
 .ranking__header th {
     text-align: left;
     border-bottom: 3px solid var(--dark-medium);
-    padding: 16px 6px 16px 6px;
+    padding: 0 6px 16px 6px;
 }
 
 .ranking__body tr {
