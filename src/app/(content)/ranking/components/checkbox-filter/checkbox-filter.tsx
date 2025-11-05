@@ -17,6 +17,7 @@ const CheckboxFilter = (props: CheckboxFilterProps) => {
           alt=''
           width={20}
           height={20}
+          className='noselect'
         />
       </Checkbox>
       <Label className='text__md--medium'>{label}</Label>

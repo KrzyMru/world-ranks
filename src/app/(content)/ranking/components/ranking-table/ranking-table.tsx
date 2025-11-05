@@ -34,7 +34,7 @@ const RankingTable = (props: RankingTableProps) => {
                                 alt={country.flags.alt}
                                 width={52}
                                 height={36}
-                                className={styles.ranking__flag}
+                                className={`${styles.ranking__flag} noselect`}
                             />
                         </td>
                         <td className="text__lg--medium">{country.name.common}</td>
