@@ -1,9 +1,9 @@
 import { Checkbox, Field, Label } from '@headlessui/react';
-import styles from "./checkbox-filter.module.css";
-import { CheckboxFilterProps } from './types';
+import styles from "./status-filter.module.css";
+import { StatusFilterProps } from './types';
 import Image from 'next/image';
 
-const CheckboxFilter = (props: CheckboxFilterProps) => {
+const StatusFilter = (props: StatusFilterProps) => {
   const { label } = { ...props }
   
   return (
@@ -25,4 +25,4 @@ const CheckboxFilter = (props: CheckboxFilterProps) => {
   );
 }
 
-export default CheckboxFilter;
+export default StatusFilter;

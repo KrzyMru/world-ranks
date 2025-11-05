@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import { CountryDataRanking } from "./types";
 import RankingTable from "./components/ranking-table/ranking-table";
-import CheckboxFilter from "./components/checkbox-filter/checkbox-filter";
+import StatusFilter from "./components/status-filter/status-filter";
 import RegionFilter from "./components/region-filter/region-filter";
 
 const Page = async () => {
@@ -36,8 +36,8 @@ const Page = async () => {
           <div className={styles.filters__content}>
             <span className="text__sm--medium">Status</span>
             <div className={styles.filters__status}>
-              <CheckboxFilter label="Member of the United Nations" />
-              <CheckboxFilter label="Independent" />
+              <StatusFilter label="Member of the United Nations" />
+              <StatusFilter label="Independent" />
             </div>
           </div>
         </div>
