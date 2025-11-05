@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import { CountryDataRanking } from "./types";
 import RankingTable from "./components/ranking-table/ranking-table";
 import CheckboxFilter from "./components/checkbox-filter/checkbox-filter";
+import RegionFilter from "./components/region-filter/region-filter";
 
 const Page = async () => {
   const data = await fetch("https://restcountries.com/v3.1/all?fields=cca3,name,region,subregion,population,area,flags,independent,unMember", {
@@ -21,11 +22,23 @@ const Page = async () => {
       <div className={styles.content}>
         <div className={styles.filters}>
           <div>Sorting</div>
-          <div>Region filters</div>
-          <div className={styles.filters__status}>
+          <div className={styles.filters__content}>
+            <span className="text__sm--medium">Region</span>
+            <div className={styles.filters__region}>
+              <RegionFilter text='Americas' />
+              <RegionFilter text='Antarctic' />
+              <RegionFilter text='Africa' />
+              <RegionFilter text='Asia' />
+              <RegionFilter text='Europe' />
+              <RegionFilter text='Oceania' />
+            </div>
+          </div>
+          <div className={styles.filters__content}>
             <span className="text__sm--medium">Status</span>
-            <CheckboxFilter label="Member of the United Nations" />
-            <CheckboxFilter label="Independent" />
+            <div className={styles.filters__status}>
+              <CheckboxFilter label="Member of the United Nations" />
+              <CheckboxFilter label="Independent" />
+            </div>
           </div>
         </div>
         <RankingTable countries={countries} />

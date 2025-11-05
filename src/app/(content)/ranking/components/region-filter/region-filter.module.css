@@ -1,0 +1,11 @@
+.checkbox {
+    padding: 8px;
+    border-radius: 0.5rem;
+    background-color: var(--dark-strong);
+    &:hover {
+        cursor: pointer;
+    }
+}
+.checkbox[data-checked] {
+    background-color: var(--dark-medium);
+}
