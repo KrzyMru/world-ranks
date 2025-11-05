@@ -20,7 +20,7 @@ const StatusFilter = (props: StatusFilterProps) => {
           className='noselect'
         />
       </Checkbox>
-      <Label className='text__md--medium'>{label}</Label>
+      <Label className='text__sm--bold'>{label}</Label>
     </Field>
   );
 }

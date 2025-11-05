@@ -10,7 +10,7 @@ const RegionFilter = (props: RegionFilterProps) => {
         {...props}
         className={styles.checkbox}
       >
-        <span className='text__md--medium noselect'>{text}</span>
+        <span className='text__sm--bold noselect'>{text}</span>
       </Checkbox>
   );
 }
