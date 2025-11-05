@@ -3,6 +3,7 @@ import { CountryDataRanking } from "./types";
 import RankingTable from "./components/ranking-table/ranking-table";
 import StatusFilter from "./components/status-filter/status-filter";
 import RegionFilter from "./components/region-filter/region-filter";
+import SortListbox from "./components/sort-listbox/sort-listbox";
 
 const Page = async () => {
   const data = await fetch("https://restcountries.com/v3.1/all?fields=cca3,name,region,subregion,population,area,flags,independent,unMember", {
@@ -21,7 +22,10 @@ const Page = async () => {
       </header>
       <div className={styles.content}>
         <div className={styles.filters}>
-          <div>Sorting</div>
+          <div className={styles.filters__content}>
+            <span className="text__sm--medium">Sort by</span>
+            <SortListbox options={['name', 'population', 'area', 'region']} value="population"/>
+          </div>
           <div className={styles.filters__content}>
             <span className="text__sm--medium">Region</span>
             <div className={styles.filters__region}>

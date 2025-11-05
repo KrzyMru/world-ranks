@@ -1,0 +1,76 @@
+.listbox__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.listbox__button {
+    width: 100%;
+    padding: 12px 16px 12px 16px;
+    border-radius: 12px;
+    text-align: left;
+    text-transform: capitalize;
+    position: relative;
+
+    border: 2px solid var(--dark-medium);
+    background-color: var(--dark-solid);
+    color: var(--gray-light);
+
+    &:hover {
+        cursor: pointer;
+        border: 2px solid var(--dark-light);
+        background-color: var(--dark-medium);
+    }
+    &:focus-visible {
+        outline: 2px solid var(--gray-light);
+    }
+}
+.listbox__button[data-open] {
+    border: 2px solid var(--dark-light);
+    background-color: var(--dark-medium);
+}
+
+.listbox__options {
+    display: flex;
+    flex-direction: column;
+    outline: none;
+    padding: 4px;
+    border-radius: 12px;
+
+    border: 2px solid var(--dark-light);
+
+    &:focus-visible {
+        outline: 2px solid var(--gray-light);
+    }
+}
+
+.listbox__option {
+    padding: 12px 16px 12px 16px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    display: flex;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--dark-medium);
+    }
+}
+.listbox__option[data-focus] {
+    background-color: var(--dark-medium);
+}
+.listbox__option[data-selected] .listbox__check {
+    display: inline;
+}
+
+.listbox__check {
+    display: none;
+    margin-left: -16px;
+}
+
+.listbox__icon {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+}
