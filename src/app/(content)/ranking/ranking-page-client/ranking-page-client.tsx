@@ -6,15 +6,22 @@ import RegionFilter from "../components/region-filter/region-filter";
 import SortListbox from "../components/sort-listbox/sort-listbox";
 import SearchBar from "../components/search-bar/search-bar";
 import { RankingPageClientProps } from "./types";
+import { useState } from "react";
 
 const RankingPageClient = (props: RankingPageClientProps) => {
-    const { countries } = { ...props } 
+    const { countries } = { ...props }
+    const [filterText, setFilterText] = useState<string>("");
+
+    const handleApplySearch = (text: string) => {
+        setFilterText(text);
+    }
 
     return (
         <div className={styles.page}>
             <header className={styles.header}>
                 <span className="text__lg--semibold">Found {countries.length} countries</span>
                 <SearchBar
+                    onEnterPress={handleApplySearch}
                     placeholder="Search by Name, Region..."
                 />
             </header>
@@ -43,7 +50,15 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                         </div>
                     </div>
                 </div>
-                <RankingTable countries={countries} />
+                <RankingTable 
+                    countries={
+                        countries
+                            .filter(country => 
+                                country.name.common.toLowerCase().includes(filterText.toLowerCase()) || country.name.official.toLowerCase().includes(filterText.toLowerCase()) ||
+                                country.region.toLowerCase().includes(filterText.toLowerCase()) || country.subregion.toLowerCase().includes(filterText.toLowerCase())
+                            )
+                    } 
+                />
             </div>
         </div>
     );

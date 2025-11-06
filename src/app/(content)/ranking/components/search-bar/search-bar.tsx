@@ -1,13 +1,24 @@
-import { InputHTMLAttributes } from "react";
+"use client"
+import { useState } from "react";
 import styles from "./search-bar.module.css";
 import Image from "next/image";
+import { SearchBarProps } from "./types";
 
-const SearchBar = (props: InputHTMLAttributes<HTMLInputElement>) => {
+const SearchBar = (props: SearchBarProps) => {
+    const { onEnterPress, ...rest } = { ...props }
+    const [searchText, setSearchText] = useState<string>("");
+
     return (
         <div className={styles.search__wrapper}>
             <input 
-                {...props}
+                {...rest}
                 type="search"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                onKeyDown={(e) => {
+                    if(e.key === 'Enter')
+                        onEnterPress(searchText);
+                }}
                 className={`${styles.search__input} text__sm--bold`}
             />
             <Image
