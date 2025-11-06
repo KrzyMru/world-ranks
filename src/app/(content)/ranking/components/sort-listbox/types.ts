@@ -1,9 +1,10 @@
 import { ListboxProps } from "@headlessui/react";
 
 interface SortListboxProps extends ListboxProps {
-    options: SortType[],
+    options: readonly SortType[],
 }
 
-type SortType = 'name' | 'population' | 'area' | 'region';
+export const sortTypes = ['name', 'population', 'area', 'region'] as const;
+type SortType = typeof sortTypes[number];
 
 export type { SortListboxProps, SortType }
