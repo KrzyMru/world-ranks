@@ -12,7 +12,7 @@
     flex-direction: column;
     gap: 24px;
 
-    @media screen and (min-width: 641px) {
+    @media screen and (min-width: 721px) {
         margin: 40px 32px 32px 32px;
         padding: 24px 32px 24px 32px;
     }
@@ -23,7 +23,7 @@
     align-items: start;
     flex-direction: column;
     gap: 24px;
-    @media screen and (min-width: 641px) {
+    @media screen and (min-width: 721px) {
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
@@ -35,7 +35,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    @media screen and (min-width: 641px) {
+    @media screen and (min-width: 721px) {
         flex-direction: row;
         flex-wrap: nowrap;
     }
@@ -46,7 +46,7 @@
     flex-direction: column;
     gap: 24px;
     max-width: 240px;
-    @media screen and (max-width: 640px) {
+    @media screen and (max-width: 720px) {
         max-width: initial;
     }
 }

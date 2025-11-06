@@ -10,13 +10,13 @@
             display: none;
         }
     }
-    @media screen and (max-width: 760px) {
+    @media screen and (max-width: 880px) {
         .ranking__header tr th:nth-last-child(2),
         .ranking__body tr td:nth-last-child(2) {
             display: none;
         }
     }
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 380px) {
         .ranking__header tr th:nth-last-child(3),
         .ranking__body tr td:nth-last-child(3) {
             display: none;
@@ -42,6 +42,9 @@
 }
 .ranking__body tr td {
     padding: 8px 6px 6px 6px;
+}
+.ranking__header th:first-child {
+    width: 72px;
 }
 
 .ranking__flag {
