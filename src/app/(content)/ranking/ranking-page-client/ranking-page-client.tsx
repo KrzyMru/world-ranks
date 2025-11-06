@@ -8,10 +8,16 @@ import SearchBar from "../components/search-bar/search-bar";
 import { RankingPageClientProps } from "./types";
 import { useState } from "react";
 import { SortType, sortTypes } from "../components/sort-listbox/types";
+import { Region, regions } from "../types";
 
 const RankingPageClient = (props: RankingPageClientProps) => {
     const { countries } = { ...props }
     const [filterText, setFilterText] = useState<string>("");
+    const [filterRegion, setFilterRegion] = useState<Record<Region, boolean>>(
+        regions.reduce((acc, region) => {
+            acc[region] = true;
+            return acc;
+        }, {} as Record<Region, boolean>));
     const [sortType, setSortType] = useState<SortType>("population");
 
     const handleApplySearch = (text: string) => {
@@ -40,12 +46,16 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                     <div className={styles.filters__content}>
                         <span className="text__sm--medium">Region</span>
                         <div className={styles.filters__region}>
-                            <RegionFilter text='Americas' />
-                            <RegionFilter text='Antarctic' />
-                            <RegionFilter text='Africa' />
-                            <RegionFilter text='Asia' />
-                            <RegionFilter text='Europe' />
-                            <RegionFilter text='Oceania' />
+                            {
+                                regions.map(region => 
+                                    <RegionFilter
+                                        key={region}
+                                        text={region}
+                                        checked={filterRegion[region]}
+                                        onChange={(val) => setFilterRegion(prev => ({...prev, [region]: val}))}
+                                    />
+                                )
+                            }
                         </div>
                     </div>
                     <div className={styles.filters__content}>
@@ -62,6 +72,8 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                             .filter(country => 
                                 country.name.common.toLowerCase().includes(filterText.toLowerCase()) || country.name.official.toLowerCase().includes(filterText.toLowerCase()) ||
                                 country.region.toLowerCase().includes(filterText.toLowerCase()) || country.subregion.toLowerCase().includes(filterText.toLowerCase())
+                            ).filter(country =>
+                                regions.filter(region => filterRegion[region]).includes(country.region)
                             ).sort((c1,c2) => {
                                 if(sortType === 'name')
                                     return c1.name.common.toLowerCase().localeCompare(c2.name.common.toLowerCase());

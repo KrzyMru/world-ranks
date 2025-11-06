@@ -4,7 +4,7 @@ interface CountryDataRanking {
         common: string,
         official: string,
     },
-    region: string,
+    region: Region,
     subregion: string,
     population: number,
     area: number,
@@ -16,5 +16,7 @@ interface CountryDataRanking {
     unMember: boolean,
 }
 
+export const regions = ['Americas', 'Antarctic', 'Africa', 'Asia', 'Europe', 'Oceania'] as const;
+type Region = typeof regions[number];
 
-export type { CountryDataRanking }
+export type { CountryDataRanking, Region }
