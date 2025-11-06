@@ -1,6 +1,6 @@
 .checkbox {
-    padding: 8px;
-    border-radius: 0.5rem;
+    padding: 4px 10px 6px 10px;
+    border-radius: 0.8rem;
 
     background-color: var(--dark-strong);
     border: 2px solid var(--dark-medium);
