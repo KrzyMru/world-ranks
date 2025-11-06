@@ -11,6 +11,11 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+
+    @media screen and (min-width: 641px) {
+        margin: 40px 32px 32px 32px;
+        padding: 24px 32px 24px 32px;
+    }
 }
 
 .header {
@@ -41,6 +46,9 @@
     flex-direction: column;
     gap: 24px;
     max-width: 240px;
+    @media screen and (max-width: 640px) {
+        max-width: initial;
+    }
 }
 
 .filters__content {
