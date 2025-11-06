@@ -3,11 +3,11 @@ import styles from "./region-filter.module.css";
 import { RegionFilterProps } from './types';
 
 const RegionFilter = (props: RegionFilterProps) => {
-  const { text } = { ...props }
+  const { text, ...rest } = { ...props }
   
   return (
       <Checkbox
-        {...props}
+        {...rest}
         className={styles.checkbox}
       >
         <span className='text__sm--bold noselect'>{text}</span>

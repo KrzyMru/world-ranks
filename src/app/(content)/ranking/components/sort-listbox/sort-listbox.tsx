@@ -4,10 +4,10 @@ import styles from "./sort-listbox.module.css";
 import Image from "next/image";
 
 const SortListbox = (props: SortListboxProps) => {
-    const { options, value } = { ...props }
+    const { options, value, ...rest } = { ...props }
 
     return (
-        <Listbox as="div" {...props} className={styles.listbox__wrapper}>
+        <Listbox as="div" {...rest} value={value} className={styles.listbox__wrapper}>
             <ListboxButton className={`${styles.listbox__button} text__sm--bold noselect`}>
                 {value}
                 <Image

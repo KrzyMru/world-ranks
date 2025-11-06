@@ -4,12 +4,12 @@ import { StatusFilterProps } from './types';
 import Image from 'next/image';
 
 const StatusFilter = (props: StatusFilterProps) => {
-  const { label } = { ...props }
+  const { label, ...rest } = { ...props }
   
   return (
     <Field className={styles.wrapper}>
       <Checkbox
-        {...props}
+        {...rest}
         className={styles.checkbox}
       >
         <Image 
