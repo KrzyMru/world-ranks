@@ -1,9 +1,13 @@
 .checkbox {
     padding: 8px;
     border-radius: 0.5rem;
+
     background-color: var(--dark-strong);
+    border: 2px solid var(--dark-medium);
+
     &:hover {
         cursor: pointer;
+        border: 2px solid var(--dark-light);
     }
     &:focus-visible {
         outline: 2px solid var(--gray-light);

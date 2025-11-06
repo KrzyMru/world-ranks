@@ -8,21 +8,30 @@
     width: 20px;
     height: 20px;
     border-radius: 0.25rem;
-    border: 1px solid var(--gray-light);
+    border: 2px solid var(--gray-light);
     > :first-child {
         opacity: 0;
     }
     &:hover {
         cursor: pointer;
+        border: 2px solid var(--blue);
     }
     &:focus-visible {
-        outline: 2px solid var(--gray-light);
+        outline: 2px solid var(--blue);
     }
 }
 .checkbox[data-checked] {
     background-color: var(--blue);
-    border: 1px solid var(--blue);
+    border: 2px solid var(--blue);
+
     > :first-child {
         opacity: 100;
+    }
+    &:hover {
+        cursor: pointer;
+        border: 2px solid var(--gray-light);
+    }
+    &:focus-visible {
+        outline: 2px solid var(--gray-light);
     }
 }
