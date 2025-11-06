@@ -19,4 +19,16 @@ interface CountryDataRanking {
 export const regions = ['Americas', 'Antarctic', 'Africa', 'Asia', 'Europe', 'Oceania'] as const;
 type Region = typeof regions[number];
 
-export type { CountryDataRanking, Region }
+export const statuses = [
+    {
+        title: 'Member of the United Nations',
+        property: 'unMember',
+    },
+    {
+        title: 'Independent',
+        property: 'independent',
+    },
+] as const;
+type Status = typeof statuses[number]['property'];
+
+export type { CountryDataRanking, Region, Status }

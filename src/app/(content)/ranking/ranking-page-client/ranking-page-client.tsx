@@ -8,7 +8,7 @@ import SearchBar from "../components/search-bar/search-bar";
 import { RankingPageClientProps } from "./types";
 import { useState } from "react";
 import { SortType, sortTypes } from "../components/sort-listbox/types";
-import { Region, regions } from "../types";
+import { Region, regions, Status, statuses } from "../types";
 
 const RankingPageClient = (props: RankingPageClientProps) => {
     const { countries } = { ...props }
@@ -17,7 +17,14 @@ const RankingPageClient = (props: RankingPageClientProps) => {
         regions.reduce((acc, region) => {
             acc[region] = true;
             return acc;
-        }, {} as Record<Region, boolean>));
+        }, {} as Record<Region, boolean>)
+    );
+    const [filterStatus, setFilterStatus] = useState<Record<Status, boolean>>(
+        statuses.reduce((acc, status) => {
+            acc[status.property] = true;
+            return acc;
+        }, {} as Record<Status, boolean>)
+    );
     const [sortType, setSortType] = useState<SortType>("population");
 
     const handleApplySearch = (text: string) => {
@@ -61,8 +68,16 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                     <div className={styles.filters__content}>
                         <span className="text__sm--medium">Status</span>
                         <div className={styles.filters__status}>
-                            <StatusFilter label="Member of the United Nations" />
-                            <StatusFilter label="Independent" />
+                            {
+                                statuses.map(status =>
+                                    <StatusFilter
+                                        key={status.property}
+                                        label={status.title}
+                                        checked={filterStatus[status.property]}
+                                        onChange={(val) => setFilterStatus(prev => ({...prev, [status.property]: val}))}
+                                    />
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -74,6 +89,8 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                                 country.region.toLowerCase().includes(filterText.toLowerCase()) || country.subregion.toLowerCase().includes(filterText.toLowerCase())
                             ).filter(country =>
                                 regions.filter(region => filterRegion[region]).includes(country.region)
+                            ).filter(country =>
+                                statuses.every(status => filterStatus[status.property] === country[status.property])
                             ).sort((c1,c2) => {
                                 if(sortType === 'name')
                                     return c1.name.common.toLowerCase().localeCompare(c2.name.common.toLowerCase());
