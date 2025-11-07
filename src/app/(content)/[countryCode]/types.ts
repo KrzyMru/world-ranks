@@ -20,4 +20,16 @@ interface CountryDataInfo {
     borders: string[],
 }
 
-export type { CountryDataInfo }
+interface CountryDataBorder {
+    cca3: string,
+    name: {
+        common: string,
+        official: string,
+    },
+    flags: {
+        png: string,
+        alt: string,
+    },
+}
+
+export type { CountryDataInfo, CountryDataBorder }

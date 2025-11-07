@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { CountryDataInfo } from "./types";
+import { CountryDataBorder, CountryDataInfo } from "./types";
+import Link from "next/link";
 
 const Page = async ({
   params,
@@ -9,13 +10,22 @@ const Page = async ({
 }) => {
   const { countryCode } = await params;
 
-  const data = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,capital,continents,currencies,borders,languages,population,subregion,area,flags`, {
+  const countryData = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}?fields=name,capital,continents,currencies,borders,languages,population,subregion,area,flags`, {
     method: "GET",
     headers: {
       "Accept": "application/json"
     }
   });
-  const country: CountryDataInfo = await data.json();
+  const country: CountryDataInfo = await countryData.json();
+
+  const borderCodes = country.borders.join(',');
+  const borderData = await fetch(`https://restcountries.com/v3.1/alpha?codes=${borderCodes}&fields=cca3,name,flags`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json"
+    }
+  });
+  const borderCountries: CountryDataBorder[] = await borderData.json();
 
   return (
     <div className={styles.page}>
@@ -45,26 +55,49 @@ const Page = async ({
       <div className={styles.country__info}>
         <div className={styles.info__part}>
           <span className="text__md--medium">Capital</span>
-          <span className="text__md--bold">{country.capital.join(', ')}</span>
+          <span className={`${styles.info__values} text__md--bold`}>{country.capital.join(', ')}</span>
         </div>
         <div className={styles.info__part}>
           <span className="text__md--medium">Subregion</span>
-          <span className="text__md--bold">{country.subregion}</span>
+          <span className={`${styles.info__values} text__md--bold`}>{country.subregion}</span>
         </div>
         <div className={styles.info__part}>
           <span className="text__md--medium">Language</span>
-          <span className="text__md--bold">{Object.values(country.languages).join(', ')}</span>
+          <span className={`${styles.info__values} text__md--bold`}>{Object.values(country.languages).join(', ')}</span>
         </div>
         <div className={styles.info__part}>
           <span className="text__md--medium">Currencies</span>
-          <span className="text__md--bold">{Object.values(country.currencies).map(v => '('+v.symbol+') '+v.name).join(', ')}</span>
+          <span className={`${styles.info__values} text__md--bold`}>{Object.values(country.currencies).map(v => '('+v.symbol+') '+v.name).join(', ')}</span>
         </div>
         <div className={styles.info__part}>
           <span className="text__md--medium">Continents</span>
-          <span className="text__md--bold">{country.continents.join(', ')}</span>
+          <span className={`${styles.info__values} text__md--bold`}>{country.continents.join(', ')}</span>
         </div>
       </div>
-      <div>Neighbouring Countries</div>
+      <div className={styles.neighbour__wrapper}>
+        <span className="text__md--medium">Neighbouring Countries</span>
+        <ul className={styles.neighbour__list}>
+          {
+            borderCountries.map(country => 
+              <li key={country.cca3}>
+                <Link 
+                  href={country.cca3}
+                  className={styles.neighbour__item}
+                >
+                  <Image
+                    src={country.flags.png}
+                    alt={country.flags.alt}
+                    width={70}
+                    height={48}
+                    className={`${styles.neighbour__flag} noselect`}
+                  />
+                  <span>{country.name.common}</span>
+                </Link>
+              </li>
+            )
+          }
+        </ul>
+      </div>
     </div>
   );
 }
