@@ -56,20 +56,20 @@ const RankingPageClient = (props: RankingPageClientProps) => {
     useEffect(() => {
         if(isLoadedRegion)
             sessionStorage.setItem("filterRegion", JSON.stringify(filterRegion));
-    }, [filterRegion]);
+    }, [filterRegion, isLoadedRegion]);
     useEffect(() => {
         if(isLoadedStatus)
             sessionStorage.setItem("filterStatus", JSON.stringify(filterStatus));
-    }, [filterStatus]);
+    }, [filterStatus, isLoadedStatus]);
     useEffect(() => {
         if(isLoadedSort)
             sessionStorage.setItem("sortType", sortType);
-    }, [sortType]);
+    }, [sortType, isLoadedSort]);
 
     useEffect(() => {
         try {
             const item = sessionStorage.getItem("filterRegion");
-            if(!item) return;
+            if(!item) throw new Error();
 
             const parsed = JSON.parse(item);
             if(parsed && typeof parsed === "object") {
@@ -83,12 +83,12 @@ const RankingPageClient = (props: RankingPageClientProps) => {
             }
         } catch(e: unknown) {
         }
-        setIsLoadedRegion(true)
+        setIsLoadedRegion(true);
     }, []);
     useEffect(() => {
         try {
             const item = sessionStorage.getItem("filterStatus");
-            if(!item) return;
+            if(!item) throw new Error();
 
             const parsed = JSON.parse(item);
             if(parsed && typeof parsed === "object") {
