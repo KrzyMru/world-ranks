@@ -6,9 +6,10 @@ import RegionFilter from "../components/region-filter/region-filter";
 import SortListbox from "../components/sort-listbox/sort-listbox";
 import SearchBar from "../components/search-bar/search-bar";
 import { RankingPageClientProps } from "./types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SortType, sortTypes } from "../components/sort-listbox/types";
 import { Region, regions, Status, statuses } from "../types";
+import Loading from "../loading";
 
 const RankingPageClient = (props: RankingPageClientProps) => {
     const { countries } = { ...props }
@@ -26,6 +27,9 @@ const RankingPageClient = (props: RankingPageClientProps) => {
         }, {} as Record<Status, boolean>)
     );
     const [sortType, setSortType] = useState<SortType>("population");
+    const [isLoadedRegion, setIsLoadedRegion] = useState<boolean>(false); // Prevents hydration errors
+    const [isLoadedStatus, setIsLoadedStatus] = useState<boolean>(false);
+    const [isLoadedSort, setIsLoadedSort] = useState<boolean>(false);
 
     const handleApplySearch = (text: string) => {
         setFilterText(text);
@@ -48,6 +52,72 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                 return c1.region.toLowerCase().localeCompare(c2.region.toLowerCase());
             return 0;
         });
+
+    useEffect(() => {
+        if(isLoadedRegion)
+            sessionStorage.setItem("filterRegion", JSON.stringify(filterRegion));
+    }, [filterRegion]);
+    useEffect(() => {
+        if(isLoadedStatus)
+            sessionStorage.setItem("filterStatus", JSON.stringify(filterStatus));
+    }, [filterStatus]);
+    useEffect(() => {
+        if(isLoadedSort)
+            sessionStorage.setItem("sortType", sortType);
+    }, [sortType]);
+
+    useEffect(() => {
+        try {
+            const item = sessionStorage.getItem("filterRegion");
+            if(!item) return;
+
+            const parsed = JSON.parse(item);
+            if(parsed && typeof parsed === "object") {
+                const keys = Object.keys(parsed);
+                const values = Object.values(parsed);
+                if(
+                    keys.every(key => regions.includes(key as Region)) &&
+                    values.every(value => typeof value === "boolean")
+                )
+                    setFilterRegion(parsed as Record<Region, boolean>);
+            }
+        } catch(e: unknown) {
+        }
+        setIsLoadedRegion(true)
+    }, []);
+    useEffect(() => {
+        try {
+            const item = sessionStorage.getItem("filterStatus");
+            if(!item) return;
+
+            const parsed = JSON.parse(item);
+            if(parsed && typeof parsed === "object") {
+                const keys = Object.keys(parsed);
+                const values = Object.values(parsed);
+                const statusProperties = statuses.map(status => status.property);
+                if(
+                    keys.every(key => statusProperties.includes(key as Status)) &&
+                    values.every(value => typeof value === "boolean")
+                ) {
+                    setFilterStatus(parsed as Record<Status, boolean>);
+                }
+            }
+        } catch(e: unknown) {
+        }
+        setIsLoadedStatus(true);
+    }, []);
+    useEffect(() => {
+        try {
+            const item = sessionStorage.getItem("sortType");
+            if(item && sortTypes.includes(item as SortType))
+                setSortType(item as SortType);
+        } catch(e: unknown) {
+        }
+        setIsLoadedSort(true);
+    }, []);
+
+    if(!isLoadedRegion || !isLoadedStatus || !isLoadedSort) // Prevents flash of default settings
+        return <Loading />;
 
     return (
         <div className={styles.page}>
