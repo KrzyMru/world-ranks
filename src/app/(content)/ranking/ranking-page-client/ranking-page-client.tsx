@@ -31,10 +31,28 @@ const RankingPageClient = (props: RankingPageClientProps) => {
         setFilterText(text);
     }
 
+    const filteredCountries = countries
+        .filter(country =>
+            country.name.common.toLowerCase().includes(filterText.toLowerCase()) || country.name.official.toLowerCase().includes(filterText.toLowerCase()) ||
+            country.region.toLowerCase().includes(filterText.toLowerCase()) || country.subregion.toLowerCase().includes(filterText.toLowerCase())
+        ).filter(country =>
+            regions.filter(region => filterRegion[region]).includes(country.region)
+        ).filter(country =>
+            statuses.every(status => filterStatus[status.property] === country[status.property])
+        ).sort((c1,c2) => {
+            if(sortType === 'name')
+                return c1.name.common.toLowerCase().localeCompare(c2.name.common.toLowerCase());
+            if(sortType === 'population' || sortType === 'area')
+                return c2[sortType] - c1[sortType];
+            if(sortType === 'region')
+                return c1.region.toLowerCase().localeCompare(c2.region.toLowerCase());
+            return 0;
+        });
+
     return (
         <div className={styles.page}>
             <header className={styles.header}>
-                <span className="text__lg--semibold">Found {countries.length} countries</span>
+                <span className="text__lg--semibold">Found {filteredCountries.length} countries</span>
                 <SearchBar
                     onEnterPress={handleApplySearch}
                     placeholder="Search by Name, Region..."
@@ -82,25 +100,7 @@ const RankingPageClient = (props: RankingPageClientProps) => {
                     </div>
                 </div>
                 <RankingTable 
-                    countries={
-                        countries
-                            .filter(country => 
-                                country.name.common.toLowerCase().includes(filterText.toLowerCase()) || country.name.official.toLowerCase().includes(filterText.toLowerCase()) ||
-                                country.region.toLowerCase().includes(filterText.toLowerCase()) || country.subregion.toLowerCase().includes(filterText.toLowerCase())
-                            ).filter(country =>
-                                regions.filter(region => filterRegion[region]).includes(country.region)
-                            ).filter(country =>
-                                statuses.every(status => filterStatus[status.property] === country[status.property])
-                            ).sort((c1,c2) => {
-                                if(sortType === 'name')
-                                    return c1.name.common.toLowerCase().localeCompare(c2.name.common.toLowerCase());
-                                if(sortType === 'population' || sortType === 'area')
-                                    return c2[sortType] - c1[sortType];
-                                if(sortType === 'region')
-                                    return c1.region.toLowerCase().localeCompare(c2.region.toLowerCase());
-                                return 0;
-                            })
-                    } 
+                    countries={filteredCountries} 
                 />
             </div>
         </div>
