@@ -4,11 +4,11 @@ import { regions, statuses } from "./types";
 const Loading = () => {
     return (
         <div className={styles.page}>
-            <div className={styles.header}>
+            <div className={`${styles.header} animation--pulse`}>
                 <div className={styles.header__text} />
                 <div className={styles.header__search} />
             </div>
-            <div className={styles.content}>
+            <div className={`${styles.content} animation--pulse`}>
                 <div className={styles.filters}>
                     <div className={styles.filters__content}>
                         <div className={styles.filters__text} />
@@ -45,7 +45,7 @@ const Loading = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.ranking}>
+                <div className={`${styles.ranking} animation--pulse`}>
                     <div className={styles.ranking__header} />
                     <div className={styles.ranking__content} />
                 </div>
