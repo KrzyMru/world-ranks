@@ -18,6 +18,9 @@
     }
     @media screen and (min-width: 830px) {
         margin: 40px auto;
+        max-width: 820px;
+        box-sizing: border-box;
+        width: 100%;
     }
 }
 
@@ -76,9 +79,6 @@
     background-color: var(--dark-medium);
     @media screen and (min-width: 381px) {
         height: 51.5px;
-    }
-    @media screen and (min-width: 830px) {
-        width: 321px;
     }
 }
 
