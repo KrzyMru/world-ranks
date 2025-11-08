@@ -19,16 +19,21 @@ const Page = async ({
   const country: CountryDataInfo = await countryData.json();
 
   const borderCodes = country.borders.join(',');
-  const borderData = await fetch(`https://restcountries.com/v3.1/alpha?codes=${borderCodes}&fields=cca3,name,flags`, {
-    method: "GET",
-    headers: {
-      "Accept": "application/json"
-    }
-  });
-  const [borderCountries] = await Promise.all<CountryDataBorder[]>([
-    borderData.json(),
-    new Promise(r => setTimeout(r, 1000)) // Small delay to avoid flickering
-  ]);
+  let borderData: Response;
+  let borderCountries: CountryDataBorder[] = [];
+  if(borderCodes.length > 0) {
+    borderData = await fetch(`https://restcountries.com/v3.1/alpha?codes=${borderCodes}&fields=cca3,name,flags`, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+    [borderCountries] = await Promise.all<CountryDataBorder[]>([
+      borderData.json(),
+      new Promise(r => setTimeout(r, 1000)) // Small delay to avoid flickering
+    ]);
+  }
+  else await new Promise(r => setTimeout(r, 1000));
 
   return (
     <div className={styles.page}>
@@ -77,30 +82,33 @@ const Page = async ({
           <span className={`${styles.info__values} text__md--bold`}>{country.continents.join(', ')}</span>
         </div>
       </div>
-      <div className={styles.neighbour__wrapper}>
-        <span className="text__md--medium">Neighbouring Countries</span>
-        <ul className={styles.neighbour__list}>
-          {
-            borderCountries.map(country => 
-              <li key={country.cca3}>
-                <Link 
-                  href={country.cca3}
-                  className={styles.neighbour__item}
-                >
-                  <Image
-                    src={country.flags.png}
-                    alt={country.flags.alt}
-                    width={70}
-                    height={48}
-                    className={`${styles.neighbour__flag} noselect`}
-                  />
-                  <span>{country.name.common}</span>
-                </Link>
-              </li>
-            )
-          }
-        </ul>
-      </div>
+      {
+        borderCountries.length > 0 &&
+        <div className={styles.neighbour__wrapper}>
+          <span className="text__md--medium">Neighbouring Countries</span>
+          <ul className={styles.neighbour__list}>
+            {
+              borderCountries.map(country => 
+                <li key={country.cca3}>
+                  <Link 
+                    href={country.cca3}
+                    className={styles.neighbour__item}
+                  >
+                    <Image
+                      src={country.flags.png}
+                      alt={country.flags.alt}
+                      width={70}
+                      height={48}
+                      className={`${styles.neighbour__flag} noselect`}
+                    />
+                    <span>{country.name.common}</span>
+                  </Link>
+                </li>
+              )
+            }
+          </ul>
+        </div>
+      }
     </div>
   );
 }
