@@ -8,7 +8,10 @@ const Page = async () => {
       "Accept": "application/json"
     }
   });
-  const countries: CountryDataRanking[] = await data.json();
+  const [countries] = await Promise.all<CountryDataRanking[]>([
+    data.json(),
+    new Promise(r => setTimeout(r, 1000)) // Small delay to avoid flickering
+  ]);
 
   return <RankingPageClient countries={countries} />
 }

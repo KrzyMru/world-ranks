@@ -25,7 +25,10 @@ const Page = async ({
       "Accept": "application/json"
     }
   });
-  const borderCountries: CountryDataBorder[] = await borderData.json();
+  const [borderCountries] = await Promise.all<CountryDataBorder[]>([
+    borderData.json(),
+    new Promise(r => setTimeout(r, 1000)) // Small delay to avoid flickering
+  ]);
 
   return (
     <div className={styles.page}>
