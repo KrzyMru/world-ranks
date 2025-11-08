@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./layout.module.css";
+import Link from "next/link";
 
 const Layout = ({
   children,
@@ -8,13 +9,18 @@ const Layout = ({
 }>) => {
   return (
     <main className={styles.layout}>
-      <Image
-        src='/icons/Logo.svg'
-        alt='World Ranks'
-        width={174}
-        height={24}
-        className={`${styles.logo} text__lg--semibold`}
-      />
+      <Link 
+        href='/ranking'
+        className={styles.logo}
+      >
+        <Image
+          src='/icons/Logo.svg'
+          alt='World Ranks'
+          width={174}
+          height={24}
+          className="text__lg--semibold"
+        />
+      </Link>
       {children}
     </main>
   );
